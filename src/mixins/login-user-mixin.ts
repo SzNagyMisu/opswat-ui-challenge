@@ -5,7 +5,7 @@ import { LOCAL_STORAGE_TOKEN_KEY } from '@/constants'
 @Mixin
 export default class LoginUserMixin extends Vue {
   loginUser (userData: User): void {
-    this.$store.dispatch('currentUser/login', userData)
+    this.$store.dispatch('currentUser/set', userData)
     window.localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, userData.token || '') // TODO mixin
     this.$router.push({ name: 'LandingPage' })
   }

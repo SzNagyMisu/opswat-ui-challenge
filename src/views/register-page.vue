@@ -21,7 +21,7 @@ import { User, ValidationErrorResponse, QuasarRules } from '@/types'
 import LoginUserMixin from '@/mixins/login-user-mixin'
 import BackendValidationMixin from '@/mixins/backend-validation-mixin'
 import { required } from '@/quasar-rules'
-import userService from '@/services/user-service'
+import loginService from '@/services/login-service'
 
 @Component
 export default class RegisterPage extends mixins(LoginUserMixin, BackendValidationMixin) {
@@ -38,7 +38,7 @@ export default class RegisterPage extends mixins(LoginUserMixin, BackendValidati
   }
 
   onSubmit (): void {
-    userService.create(this.user).then((user: User): void => {
+    loginService.createUser(this.user).then((user: User): void => {
       this.loginUser(user)
       this.$q.notify({
         type: 'positive',
