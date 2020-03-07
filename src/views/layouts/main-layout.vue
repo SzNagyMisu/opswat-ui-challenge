@@ -9,6 +9,7 @@ q-layout#main-layout.row
           q-item(clickable v-close-popup :to="{ name: 'DeleteUserPage' }")
             q-item-section
               q-item-label Delete User
+      q-btn(flat label="articles" :to="{ name: 'ListArticles' }")
       q-btn-dropdown(flat :label="currentUserData" no-caps)
         q-list
           q-item(clickable v-close-popup :to="{ name: 'ProfilePage' }")

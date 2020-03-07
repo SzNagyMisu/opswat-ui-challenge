@@ -29,3 +29,36 @@ export interface QuasarRules {
 export interface QuasarRule {
   (value: string|any): true|string
 }
+
+export interface QTableColumn {
+  name: string
+  label: string
+  field?: string|((row: any) => any)
+  required?: boolean
+  align?: 'left'|'right'|'center'
+  sortable?: boolean
+  sort?: (a: any, b: any, aRow?: any, bRow?: any) => number
+  format?: (val: any, row?: any) => string
+  style?: string
+  classes?: string
+  headerStyle?: string
+  headerClasses?: string
+}
+
+export interface NewArticle {
+  title: string
+  description: string
+  body: string
+  tagList: string[]
+}
+
+export interface Article {
+  id: number
+  slug: string
+  title: string
+  description: string
+  body: string
+  tagList: string[]
+  created: number
+  author: User
+}
