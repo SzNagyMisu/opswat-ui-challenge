@@ -32,8 +32,10 @@ export default class MainLayout extends Vue {
   created (): void {
     if (this.currentUser.email === '') {
       userService.getCurrent().then((user: User): void => {
-        window.localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, user.token as string) // TODO interface CurrentUser ?
+        window.localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, user.token as string)
         this.$store.dispatch('currentUser/set', user)
+      }).catch(() => {
+        this.$router.push({ name: 'LoginPage' })
       })
     }
   }

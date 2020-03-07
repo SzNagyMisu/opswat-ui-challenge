@@ -17,7 +17,7 @@ q-page#list-articles
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { Article, QTableColumn } from '@/types'
-import Confirm from '@/decorators/confirm'
+import { Confirm, NotifySuccess } from '@/decorators'
 
 @Component
 export default class ListArticles extends Vue {
@@ -25,7 +25,7 @@ export default class ListArticles extends Vue {
     { name: 'title', label: 'Title', field: 'title' },
     { name: 'description', label: 'Description', field: 'description' },
     { name: 'tags', label: 'Tags', field: (row: Article) => row.tagList.join(',') },
-    { name: 'created', label: 'Created', field: (row: Article) => new Date(row.created).toLocaleDateString('en') },
+    { name: 'created', label: 'Created', field: (row: Article) => new Date(row.created).toLocaleString('en') },
     { name: 'author', label: 'Author', field: (row: Article) => row.author.username },
     { name: 'links', label: '' }
   ]
@@ -42,14 +42,9 @@ export default class ListArticles extends Vue {
     title: 'Destroy article',
     message: 'Are you sure you want to destroy this article? This operation cannot be undone.'
   })
-  deleteArticle (article: Article): void {
-    this.$store.dispatch('articles/remove', article).then((): void => {
-      this.$q.notify({ // TODO @NotifySuccess
-        message: 'Article destroyed successfully',
-        type: 'positive',
-        position: 'top-right'
-      })
-    })
+  @NotifySuccess('Article destroyed successfully')
+  deleteArticle (article: Article): Promise<void> {
+    return this.$store.dispatch('articles/remove', article)
   }
 }
 </script>

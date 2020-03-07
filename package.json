@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "email-validator": "^2.0.4",
     "material-icons": "^0.3.1",
     "quasar": "^1.9.6",
     "vue": "^2.6.11",

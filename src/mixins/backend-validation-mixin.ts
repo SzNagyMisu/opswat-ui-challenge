@@ -10,7 +10,7 @@ export default class BackendValidationMixin extends Vue {
         message: errorMessage,
         position: 'top-right',
         timeout: 0,
-        closeBtn: '×' // TODO why the color?
+        closeBtn: '×'
       })
     })
   }

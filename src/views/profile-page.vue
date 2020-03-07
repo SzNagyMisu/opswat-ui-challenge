@@ -6,7 +6,7 @@ q-page#profile-page.row
       .q-py-md
         q-input(v-model="user.username" filled label="Username" :rules="rules.username")/
       .q-py-md
-        q-input(v-model="user.email" filled type="email" label="E-mail" :rules="rules.email")/
+        q-input(v-model="user.email" filled label="E-mail" :rules="rules.email")/
       .q-py-md
         q-input(v-model="user.bio" filled type="textarea" label="Bio")/
       .q-py-md
@@ -17,7 +17,7 @@ q-page#profile-page.row
 import { Vue, Component } from 'vue-property-decorator'
 import { User, QuasarRules } from '@/types'
 import userService from '@/services/user-service'
-import { required } from '@/quasar-rules'
+import { required, email } from '@/quasar-rules'
 
 @Component
 export default class ProfilePage extends Vue {
@@ -31,7 +31,7 @@ export default class ProfilePage extends Vue {
 
   rules: QuasarRules = {
     username: [ required ],
-    email: [ required ]
+    email: [ required, email ]
   }
 
   async created (): Promise<void> {

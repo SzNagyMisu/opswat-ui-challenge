@@ -4,7 +4,7 @@ q-page#delete-user-page.row
     h3 Delete User
     q-form(@submit="onSubmit")
       .q-py-md
-        q-input(v-model="email" filled type="email" label="E-mail" :rules="emailRules" hint="Enter an e-mail address")/
+        q-input(v-model="email" filled label="E-mail" :rules="emailRules" hint="Enter an e-mail address")/
       .q-py-md
         q-btn(type="submit" label="Delete" color="negative")/
 </template>
@@ -14,13 +14,13 @@ import Component, { mixins } from 'vue-class-component'
 import BackendValidationMixin from '@/mixins/backend-validation-mixin'
 import { AxiosResponse } from 'axios'
 import { QuasarRule, ValidationErrorResponse } from '@/types'
-import { required } from '@/quasar-rules'
+import { required, email } from '@/quasar-rules'
 import userService from '@/services/user-service'
 
 @Component
 export default class DeleteUserPage extends mixins(BackendValidationMixin) {
   email: string = ''
-  emailRules: QuasarRule[] = [ required ]
+  emailRules: QuasarRule[] = [ required, email ]
 
   onSubmit (): void {
     userService.destroy(this.email).then(() => {

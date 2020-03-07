@@ -2,7 +2,7 @@ import BaseService from './base-service'
 import { AxiosRequestConfig } from 'axios'
 import { LOCAL_STORAGE_TOKEN_KEY } from '@/constants'
 
-export default class AuthenticatableService extends BaseService {
+export default abstract class AuthenticatableService extends BaseService {
   constructor () {
     super()
     this.http.interceptors.request.use(

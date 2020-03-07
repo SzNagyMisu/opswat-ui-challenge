@@ -5,10 +5,9 @@ q-page#register-page
     .q-py-md
       q-input(v-model="user.username" label="Username" :rules="rules.username")/
     .q-py-md
-      q-input(v-model="user.email" type="email" label="E-mail" :rules="rules.email")/
+      q-input(v-model="user.email" label="E-mail" :rules="rules.email")/
     .q-py-md
-      //- TODO q-password
-      q-input(v-model="user.password" type="password" label="Password" :rules="rules.password")/
+      password-field(v-model="user.password" label="Password" :rules="rules.password")/
     .q-py-md.flex.justify-between
       q-btn.q-px-lg.q-py-sm(type="submit" label="Sign up" color="primary")/
       q-btn.q-px-xl.q-py-sm(:to="{ name: 'LoginPage' }" label="Back to login" color="secondary")/
@@ -20,10 +19,13 @@ import { AxiosResponse } from 'axios'
 import { User, ValidationErrorResponse, QuasarRules } from '@/types'
 import LoginUserMixin from '@/mixins/login-user-mixin'
 import BackendValidationMixin from '@/mixins/backend-validation-mixin'
-import { required } from '@/quasar-rules'
+import { required, email } from '@/quasar-rules'
 import loginService from '@/services/login-service'
+import PasswordField from '@/components/password-field.vue'
 
-@Component
+@Component({
+  components: { PasswordField }
+})
 export default class RegisterPage extends mixins(LoginUserMixin, BackendValidationMixin) {
   user: User = {
     username: '',
@@ -33,7 +35,7 @@ export default class RegisterPage extends mixins(LoginUserMixin, BackendValidati
 
   rules: QuasarRules = {
     username: [ required ],
-    email: [ required ],
+    email: [ required, email ],
     password: [ required ]
   }
 
