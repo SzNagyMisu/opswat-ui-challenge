@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosError, AxiosResponse } from 'axios'
 import { BACKEND_BASE_URL } from '@/constants'
 
 export default abstract class BaseService {
-  protected readonly http: AxiosInstance = axios.create({
+  readonly http: AxiosInstance = axios.create({
     baseURL: BACKEND_BASE_URL
   })
 
